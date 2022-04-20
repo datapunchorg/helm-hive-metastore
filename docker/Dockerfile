@@ -39,9 +39,11 @@ RUN curl -s http://apache.uvigo.es/hive/hive-standalone-metastore-3.0.0/hive-sta
 RUN cp ${HADOOP_HOME}/share/hadoop/tools/lib/hadoop-aws* ${METASTORE_HOME}/lib/ && \
     cp ${HADOOP_HOME}/share/hadoop/tools/lib/aws-java-sdk* ${METASTORE_HOME}/lib/
 
+RUN dir ${HADOOP_HOME}/share/hadoop/hdfs/lib/
+
 # Solve jar file conflict in Hive, see https://issues.apache.org/jira/browse/HIVE-22915
-RUN rm ${METASTORE_HOME}/lib/guava-19.0.jar && \
-    cp ${HADOOP_HOME}/share/hadoop/hdfs/lib/guava-27.0-jre.jar ${METASTORE_HOME}/lib/
+RUN rm ${METASTORE_HOME}/lib/guava-*.jar && \
+    cp ${HADOOP_HOME}/share/hadoop/hdfs/lib/guava-*.jar ${METASTORE_HOME}/lib/
 
 # Download and install the postgres connector used by HiveMetastore
 RUN curl -s https://jdbc.postgresql.org/download/postgresql-42.2.16.jar -o postgresql-42.2.16.jar && mv postgresql-42.2.16.jar /opt/postgresql-jdbc.jar
