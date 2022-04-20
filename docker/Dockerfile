@@ -39,8 +39,6 @@ RUN curl -s http://apache.uvigo.es/hive/hive-standalone-metastore-3.0.0/hive-sta
 RUN cp ${HADOOP_HOME}/share/hadoop/tools/lib/hadoop-aws* ${METASTORE_HOME}/lib/ && \
     cp ${HADOOP_HOME}/share/hadoop/tools/lib/aws-java-sdk* ${METASTORE_HOME}/lib/
 
-RUN dir ${HADOOP_HOME}/share/hadoop/hdfs/lib/
-
 # Solve jar file conflict in Hive, see https://issues.apache.org/jira/browse/HIVE-22915
 RUN rm ${METASTORE_HOME}/lib/guava-*.jar && \
     cp ${HADOOP_HOME}/share/hadoop/hdfs/lib/guava-*.jar ${METASTORE_HOME}/lib/
