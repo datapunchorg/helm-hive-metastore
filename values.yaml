@@ -10,23 +10,28 @@ replicaCount: 1
 
 ## Default Hive image and tag. Please build image locally before applying this.
 image:
-  name: hive-metastore
-  tag: latest
+  name: ghcr.io/datapunchorg/helm-hive-metastore
+  tag: main-1650351477
   pullPolicy: IfNotPresent
 
 
 env:
-  HIVE_DB_EXTERNAL: "false"
+  HIVE_DB_EXTERNAL: "true"
+  HIVE_DB_HOST: "postgres-postgresql.default.svc.cluster.local:5432"
   HIVE_DB_NAME: metastore_db
+  HIVE_DB_USER: postgres
+  HIVE_DB_PASS: jYTCrDpftG
+  HIVE_CONF_PARAMS: hive.metastore.event.db.notification.api.auth:false;hadoop.proxyuser.hive.hosts:HS2_HOST;hadoop.proxyuser.hive.groups:*;datanucleus.autoStartMechanism:SchemaTable
+
 
 ## Resource requests and limits: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
 resources:
   limits:
-    cpu: 2
-    memory: 4Gi
+    cpu: 1
+    memory: 1Gi
   requests:
-    cpu: 2
-    memory: 4Gi
+    cpu: 1
+    memory: 1Gi
 
 service:
   type: ClusterIP
