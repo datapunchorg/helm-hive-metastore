@@ -2,7 +2,7 @@ FROM openjdk:8-slim
 LABEL maintainer="Amom Mendes"
 LABEL hive-metastore-version="3.0.0"
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-ARG HADOOP_VERSION=3.2.0
+ARG HADOOP_VERSION=3.2.3
 
 RUN apt-get update && \
     apt-get install -y curl --no-install-recommends && \

@@ -11,7 +11,7 @@ replicaCount: 1
 ## Default Hive image and tag. Please build image locally before applying this.
 image:
   name: ghcr.io/datapunchorg/helm-hive-metastore
-  tag: main-1650351477
+  tag: main-1650417755
   pullPolicy: IfNotPresent
 
 
