@@ -48,6 +48,11 @@ RUN curl -s https://jdbc.postgresql.org/download/postgresql-42.2.16.jar -o postg
 RUN cp /opt/postgresql-jdbc.jar  ${HADOOP_HOME}/share/hadoop/common/lib/ && chmod -R 775 ${HADOOP_HOME}/share/hadoop/common/lib/*
 RUN cp /opt/postgresql-jdbc.jar ${METASTORE_HOME}/lib/ && chmod -R 775 ${METASTORE_HOME}/lib/*
 
+# Download and install the mysql connector used by HiveMetastore
+RUN curl -s https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.28/mysql-connector-java-8.0.28.jar -o mysql-connector-java-8.0.28.jar && mv mysql-connector-java-8.0.28.jar /opt/mysql-connector-java-8.0.28.jar
+RUN cp /opt/mysql-connector-java-8.0.28.jar  ${HADOOP_HOME}/share/hadoop/common/lib/ && chmod -R 775 ${HADOOP_HOME}/share/hadoop/common/lib/*
+RUN cp /opt/mysql-connector-java-8.0.28.jar ${METASTORE_HOME}/lib/ && chmod -R 775 ${METASTORE_HOME}/lib/*
+
 COPY entrypoint.sh ${METASTORE_HOME}/bin/
 RUN chmod 775 ${METASTORE_HOME}/bin/entrypoint.sh
 
